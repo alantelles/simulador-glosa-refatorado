@@ -13,3 +13,6 @@ out/
 .settings
 .classpath
 .factorypath
+
+# para ignorar arquivos gerados pela aplicação de irem pro repo
+src/main/resources/gerado/*.csv

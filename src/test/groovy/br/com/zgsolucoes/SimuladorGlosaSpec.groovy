@@ -2,6 +2,7 @@ package br.com.zgsolucoes
 
 import br.com.zgsolucoes.simuladorglosa.gerador.GeradorDeCriticas
 import br.com.zgsolucoes.simuladorglosa.repositorios.TabelaDePrecosRepositorio
+import br.com.zgsolucoes.simuladorglosa.servicos.impressao.TipoImpressao
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification
@@ -24,14 +25,14 @@ class SimuladorGlosaSpec extends Specification {
 		File arquivo = new File(GeradorDeCriticas.getResource('/arquivo_itens.csv').path)
 
 		when:
-		geradorDeCriticas.gereFormatadoBrl(arquivo, nomeArquivo)
+		geradorDeCriticas.gereImpressao(arquivo, nomeArquivo, tipoImpressao)
 
 		then:
 		Paths.get(PATH_GERADO, nomeArquivo).toFile().text == GeradorDeCriticas.getResource('/'.concat(arquivoEsperado)).text
 
 		where:
-		nomeArquivo            | arquivoEsperado
-		'gerado_formatado.csv' | 'esperado_formatado.csv'
+        nomeArquivo            | tipoImpressao     || arquivoEsperado
+        'gerado_formatado.csv' | TipoImpressao.BRL || 'esperado_formatado.csv'
 	}
 
 	void 'test gerador de criticas sem formatar'() {
@@ -39,7 +40,7 @@ class SimuladorGlosaSpec extends Specification {
 		File arquivo = new File(GeradorDeCriticas.getResource('/arquivo_itens.csv').path)
 
 		when:
-		geradorDeCriticas.gereSemFormatar(arquivo, nomeArquivo)
+		geradorDeCriticas.gereImpressao(arquivo, nomeArquivo)
 
 		then:
 		Paths.get(PATH_GERADO, nomeArquivo).toFile().text == GeradorDeCriticas.getResource('/'.concat(arquivoEsperado)).text

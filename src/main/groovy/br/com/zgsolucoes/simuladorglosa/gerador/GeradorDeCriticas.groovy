@@ -25,12 +25,12 @@ class GeradorDeCriticas {
 	@Inject
 	ImpressorValorAnalisado impressorValorAnalisado
 
-	void gereSemFormatar(File arquivo, String nomeArquivo) {
-		imprimir(arquivo, nomeArquivo, TipoImpressao.PADRAO)
+	void gereImpressao(File arquivo, String nomeArquivo) {
+		gereImpressao(arquivo, nomeArquivo, TipoImpressao.PADRAO)
 	}
 
-	void gereFormatadoBrl(File arquivo, String nomeArquivo) {
-		imprimir(arquivo, nomeArquivo, TipoImpressao.BRL)
+	void gereImpressao(File arquivo, String nomeArquivo, TipoImpressao tipoImpressao) {
+		imprimir(arquivo, nomeArquivo, tipoImpressao)
 	}
 
 	List<ValorAnalisado> gere(File arquivo) {
