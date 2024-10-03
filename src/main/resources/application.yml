@@ -1,0 +1,23 @@
+micronaut:
+    application:
+        name: gestaoRepasse
+---
+datasources:
+    default:
+        url: jdbc:postgresql://localhost:5432/simulador-glosa
+        username: postgres
+        password: fibo123
+        driverClassName: org.postgresql.Driver
+        dialect: POSTGRES
+
+---
+jpa:
+    default:
+        entity-scan:
+            packages: br.com.zgsolucoes.simuladorglosa.dominio
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                hbm2ddl:
+                    auto: none
+
